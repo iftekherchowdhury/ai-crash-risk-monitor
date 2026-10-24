@@ -56,3 +56,7 @@ Rate stress now uses 1-year changes (10y real: calm 0, stressed +1.25 pp; 10y no
 
 ## 8. Limitations
 Hand-set thresholds with hindsight (lookahead bias in the backtest); proxies in the backtest; no warning before COVID or 2022; few independent episodes, so hit rates are rough. Not financial advice.
+
+## Disclosures
+
+The author holds no positions in CoreWeave (CRWV) or Nvidia (NVDA), including options, as of Oct 24, 2026. Not financial advice.

@@ -21,7 +21,7 @@ const WEAK = [
   "AI-specific inputs (capex, CoreWeave, neoclouds, GPU prices, BDCs, private credit) have no free history, so they cannot be backtested at all. Level 2 has no core estimate.",
   "Proxies. The backtest uses Baa−10y (≥3.0%) for the HY OAS > 6% trigger and VIX for VXN.",
 ];
-const DISCLOSURE = "Author's positions disclosure: pending. A statement of any holdings related to the companies and markets tracked here will be added before this section is considered complete.";
+const DISCLOSURE = "The author holds no positions in CoreWeave (CRWV) or Nvidia (NVDA), including options, as of Oct 24, 2026.";
 const METHOD = [
   ["Indicator stress", "s = clamp((value − calm) / (stressed − calm), 0, 1). Thresholds are in the Indicators table and data/indicators.csv."],
   ["Composite", "Weighted mean of the members that have data. Missing members drop out; stale values still count (and are flagged)."],

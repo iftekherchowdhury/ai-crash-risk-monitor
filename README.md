@@ -77,7 +77,7 @@ Python 3.9+ standard library only.
 
 ## Disclosures
 
-Author's positions disclosure: **pending**. A statement of any holdings related to the companies and markets tracked here will be added here. Not financial advice.
+The author holds no positions in CoreWeave (CRWV) or Nvidia (NVDA), including options, as of Oct 24, 2026. Not financial advice.
 
 ## Maintainers wanted
 

@@ -204,7 +204,7 @@ export default function App() {
       </Section>
 
       <Section heading="Disclosures">
-        <Text>{"Author's positions disclosure: pending. A statement of any holdings related to the companies and markets tracked here will be added. Not financial advice."}</Text>
+        <Text>{"The author holds no positions in CoreWeave (CRWV) or Nvidia (NVDA), including options, as of Oct 24, 2026. Not financial advice."}</Text>
       </Section>
 
       <Section heading="Sources">
