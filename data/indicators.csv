@@ -1,36 +1,36 @@
-id,level,group,name,unit,calm,stressed,weight,baseline,source
-sox_dd,1,price,SOX drawdown from Jun 22 record,%,-5,-35,0.20,-26.3,https://historyofmarket.com/semi/semi-price/
-vxn,1,vol,VXN (Nasdaq-100 volatility),pts,18,40,0.15,28.72,https://fred.stlouisfed.org/series/VXNCLS
-real10,1,rates,10y real yield (TIPS),%,1.5,3.0,0.12,2.64,https://fred.stlouisfed.org/series/DFII10
-nom10,1,rates,10y Treasury yield,%,4.0,5.5,0.10,4.999,https://www.cnbc.com/2026/10/23/bonds-yields-us-treasurys.html
-hike,1,rates,Fed hike odds (Oct 28 meeting),%,0,60,0.10,10.3,https://growbeansprout.com/tools/fedwatch
-ai_pe,1,valuation,AI basket forward P/E,x,25,40,0.08,,
-ndx_pe,1,valuation,Nasdaq-100 forward P/E,x,20,30,0.07,21.36,https://www.nasdaq.com/docs/global-indexes/global-markets-dashboard-oct-16-2026
-ndx,1,price,Nasdaq-100 drawdown from record close (Oct 6 2026: 31224.69),%,-3,-20,0.08,-7.26,https://fred.stlouisfed.org/series/NASDAQ100
-vix,1,vol,VIX,pts,15,35,0.05,19.03,https://fred.stlouisfed.org/series/VIXCLS
-wti,1,oil,WTI crude,$/bbl,75,130,0.05,107.89,https://fred.stlouisfed.org/series/DCOILWTICO
-capex,2,capex,Hyperscaler capex guidance (2026 total),$bn,700,550,0.30,700,https://www.tmtfinance.com/intel/2026-hyperscaler-capex-tops-us700bn-analysis
-nvda_spx,2,nvda,NVDA / S&P 500 ratio (x1000),ratio,31,22,0.20,27.67,https://stockanalysis.com/stocks/nvda/history/
-nvda_dd,2,nvda,NVDA drawdown from Oct 6 high,%,0,-35,0.10,-11.8,https://stockanalysis.com/stocks/nvda/history/
-dc_cancel,2,buildout,Data-center delay/cancel reports (Oct),count,0,10,0.25,4,https://gmt8press.com/content/detail/443599
-neocloud,2,neocloud,Neocloud peers 1-month move (NBIS/IREN avg),%,0,-50,0.15,-35.5,https://gmt8press.com/content/detail/443599
-hy,3,spreads,HY OAS,%,3.0,6.0,0.15,3.40,https://fred.stlouisfed.org/series/BAMLH0A0HYM2
-ccc,3,spreads,CCC OAS,%,9,18,0.12,13.40,https://fred.stlouisfed.org/series/BAMLH0A3HYC
-b_oas,3,spreads,Single-B OAS,%,3.0,7.0,0.06,3.46,https://fred.stlouisfed.org/series/BAMLH0A2HYB
-ig,3,spreads,IG corporate OAS,%,0.8,1.8,0.05,0.89,https://fred.stlouisfed.org/series/BAMLC0A0CM
-bdc_disc,3,bdc,Listed debt BDC discount to NAV,%,-5,-35,0.12,-26.5,https://www.cefadvisors.com/Download/CEF%20Advisors%203Q%202026%20Article%20(PDF).pdf
-bdc_ytd,3,bdc,BDC index YTD return,%,5,-25,0.05,-8.6,https://www.cefadvisors.com/Download/CEF%20Advisors%203Q%202026%20Article%20(PDF).pdf
-crwv,3,coreweave,CRWV stock,$,90,20,0.10,54.24,https://exa.ai/library/markets/stock/CRWV?date=2026-10-23&view=daily
-crwv_bond,3,coreweave,CRWV unsecured bond price,cents,98,50,0.08,79,https://finance.yahoo.com/markets/stocks/articles/coreweave-stock-fell-25-last-081349155.html
-crwv_cds,3,coreweave,CRWV 5y CDS,bps,400,2000,0.12,1145,https://www.cnbc.com/2026/10/21/coreweaves-market-confidence-erodes-as-bond-yields-spike-stock-sinks.html
-h100,3,gpu,H100 SXM rental (Ornn OCPI),$/hr,3.5,1.5,0.10,3.17,https://data.ornn.com/markets/h100-sxm
-b200,3,gpu,B200 rental,$/hr,6,3,0.05,,
-stlfsi,4,stress_idx,St. Louis Fed FSI,idx,-0.5,1.5,0.15,-0.6328,https://fred.stlouisfed.org/series/STLFSI4
-nfci,4,stress_idx,Chicago Fed NFCI,idx,-0.5,0.5,0.15,-0.496,https://fred.stlouisfed.org/series/NFCI
-anfci,4,stress_idx,Chicago Fed adjusted NFCI,idx,-0.5,0.5,0.05,-0.518,https://fred.stlouisfed.org/series/ANFCI
-kbw,4,banks,KBW bank index drawdown from 52w high,%,-5,-35,0.15,-12.8,https://stocknear.com/index/%5EBKX/history
-sofr_iorb,4,funding,SOFR minus IORB,bps,-5,20,0.12,0,https://fred.stlouisfed.org/series/SOFR
-sofr99,4,funding,SOFR 99th pct minus IORB,bps,5,40,0.05,8,https://fred.stlouisfed.org/series/SOFR99
-move,4,stress_idx,MOVE index,pts,80,160,0.13,103.31,https://finance.yahoo.com/quote/%5EMOVE/history/
-pc_redeem,4,privcredit,Non-traded BDC redemption requests (Q3),% of NAV,3,20,0.12,13.0,https://www.investmentnews.com/alternatives/pace-of-investors-selling-nontraded-bdcs-slows-but-remains-significant-according-to-fitch/268574
-pc_gated,4,privcredit,Private credit funds gating/prorating (count),count,0,15,0.08,,
+id,level,group,name,unit,calm,stressed,weight,baseline,source,mode,scored,core
+sox_dd,1,price,SOX drawdown from record close,%,-5,-35,0.20,-26.3,https://fred.stlouisfed.org/series/NASDAQSOX,auto,1,1
+vxn,1,vol,VXN (Nasdaq-100 volatility),pts,18,40,0.15,28.72,https://fred.stlouisfed.org/series/VXNCLS,auto,1,0
+real10_chg,1,rates,"10y real yield (TIPS), 1-year change",pp,0,1.25,0.12,2.64,https://fred.stlouisfed.org/series/DFII10,auto,1,1
+nom10_chg,1,rates,"10y Treasury yield, 1-year change",pp,0,1.5,0.10,4.999,https://fred.stlouisfed.org/series/DGS10,auto,1,1
+hike,1,rates,Fed hike odds (Oct 28 meeting),%,0,60,0.10,10.3,https://growbeansprout.com/tools/fedwatch,manual,1,0
+ai_pe,1,valuation,AI basket forward P/E,x,25,40,0.08,,,manual,0,0
+ndx_pe,1,valuation,Nasdaq-100 forward P/E,x,20,30,0.07,21.36,https://www.nasdaq.com/docs/global-indexes/global-markets-dashboard-oct-16-2026,manual,1,0
+ndx,1,price,Nasdaq-100 drawdown from record close (Oct 6 2026: 31224.69),%,-3,-20,0.08,-7.26,https://fred.stlouisfed.org/series/NASDAQ100,auto,1,1
+vix,1,vol,VIX,pts,15,35,0.05,19.03,https://fred.stlouisfed.org/series/VIXCLS,auto,1,1
+wti,1,oil,WTI crude,$/bbl,75,130,0.05,107.89,https://fred.stlouisfed.org/series/DCOILWTICO,auto,1,0
+capex,2,capex,Hyperscaler capex guidance (2026 total),$bn,700,550,0.30,700,https://www.tmtfinance.com/intel/2026-hyperscaler-capex-tops-us700bn-analysis,manual,1,0
+nvda_spx,2,nvda,NVDA / S&P 500 ratio (x1000),ratio,31,22,0.20,27.67,https://stockanalysis.com/stocks/nvda/history/,manual,1,0
+nvda_dd,2,nvda,NVDA drawdown from Oct 6 high,%,0,-35,0.10,-11.8,https://stockanalysis.com/stocks/nvda/history/,manual,1,0
+dc_cancel,2,buildout,Data-center delay/cancel reports (Oct),count,0,10,0.25,4,https://gmt8press.com/content/detail/443599,manual,1,0
+neocloud,2,neocloud,Neocloud peers 1-month move (NBIS/IREN avg),%,0,-50,0.15,-35.5,https://gmt8press.com/content/detail/443599,manual,1,0
+hy,3,spreads,HY OAS,%,3.0,6.0,0.15,3.40,https://fred.stlouisfed.org/series/BAMLH0A0HYM2,auto,1,1
+ccc,3,spreads,CCC OAS,%,9,18,0.12,13.40,https://fred.stlouisfed.org/series/BAMLH0A3HYC,auto,1,0
+b_oas,3,spreads,Single-B OAS,%,3.0,7.0,0.06,3.46,https://fred.stlouisfed.org/series/BAMLH0A2HYB,auto,1,0
+ig,3,spreads,IG corporate OAS,%,0.8,1.8,0.05,0.89,https://fred.stlouisfed.org/series/BAMLC0A0CM,auto,1,0
+bdc_disc,3,bdc,Listed debt BDC discount to NAV,%,-5,-35,0.12,-26.5,https://www.cefadvisors.com/Download/CEF%20Advisors%203Q%202026%20Article%20(PDF).pdf,manual,1,0
+bdc_ytd,3,bdc,BDC index YTD return,%,5,-25,0.05,-8.6,https://www.cefadvisors.com/Download/CEF%20Advisors%203Q%202026%20Article%20(PDF).pdf,manual,1,0
+crwv,3,coreweave,CRWV stock,$,90,20,0.10,54.24,https://exa.ai/library/markets/stock/CRWV?date=2026-10-23&view=daily,manual,1,0
+crwv_bond,3,coreweave,CRWV unsecured bond price,cents,98,50,0.08,79,https://finance.yahoo.com/markets/stocks/articles/coreweave-stock-fell-25-last-081349155.html,manual,1,0
+crwv_cds,3,coreweave,CRWV 5y CDS,bps,400,2000,0.12,1145,https://www.cnbc.com/2026/10/21/coreweaves-market-confidence-erodes-as-bond-yields-spike-stock-sinks.html,manual,1,0
+h100,3,gpu,H100 SXM rental (Ornn OCPI),$/hr,3.5,1.5,0.10,3.17,https://data.ornn.com/markets/h100-sxm,manual,1,0
+b200,3,gpu,B200 rental,$/hr,6,3,0.05,,,manual,0,0
+stlfsi,4,stress_idx,St. Louis Fed FSI,idx,-0.5,1.5,0.15,-0.6328,https://fred.stlouisfed.org/series/STLFSI4,auto,1,1
+nfci,4,stress_idx,Chicago Fed NFCI,idx,-0.5,0.5,0.15,-0.496,https://fred.stlouisfed.org/series/NFCI,auto,1,1
+anfci,4,stress_idx,Chicago Fed adjusted NFCI,idx,-0.5,0.5,0.05,-0.518,https://fred.stlouisfed.org/series/ANFCI,auto,1,0
+bank_dd,4,banks,Nasdaq Bank index drawdown from 52w high (replaces KBW),%,-5,-35,0.15,-12.8,https://fred.stlouisfed.org/series/NASDAQBANK,auto,1,0
+sofr_iorb,4,funding,SOFR minus IORB,bps,-5,20,0.12,0,https://fred.stlouisfed.org/series/SOFR,auto,1,0
+sofr99,4,funding,SOFR 99th pct minus IORB,bps,5,40,0.05,8,https://fred.stlouisfed.org/series/SOFR99,auto,1,0
+move,4,stress_idx,MOVE index,pts,80,160,0.13,103.31,https://finance.yahoo.com/quote/%5EMOVE/history/,manual,1,0
+pc_redeem,4,privcredit,Non-traded BDC redemption requests (Q3),% of NAV,3,20,0.12,13.0,https://www.investmentnews.com/alternatives/pace-of-investors-selling-nontraded-bdcs-slows-but-remains-significant-according-to-fitch/268574,manual,1,0
+pc_gated,4,privcredit,Private credit funds gating/prorating (count),count,0,15,0.08,,,manual,0,0

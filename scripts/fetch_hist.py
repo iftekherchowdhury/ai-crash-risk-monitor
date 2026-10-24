@@ -3,7 +3,7 @@
 import os, subprocess, sys, time
 def get(url):  # curl: FRED stalls some non-curl TLS clients
     return subprocess.run(['curl', '-fsSL', '--max-time', '90', url], check=True, capture_output=True).stdout
-SERIES = ['NASDAQ100', 'VIXCLS', 'DGS10', 'DFII10', 'BAA10Y', 'STLFSI4', 'NFCI']
+SERIES = ['NASDAQ100', 'VIXCLS', 'DGS10', 'DFII10', 'BAA10Y', 'STLFSI4', 'NFCI', 'NASDAQSOX']
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); os.makedirs(f'{root}/hist', exist_ok=True)
 for s in SERIES:
     url = f'https://fred.stlouisfed.org/graph/fredgraph.csv?id={s}&cosd=1990-01-01'

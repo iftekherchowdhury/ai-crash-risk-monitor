@@ -1,8 +1,8 @@
 level,group,weight,single_company,note
 1,price,0.30,0,SOX and Nasdaq-100 drawdowns (correlated price damage)
 1,vol,0.20,0,VXN and VIX (equity implied volatility)
-1,rates,0.25,0,10y real and nominal yields and Fed hike odds
-1,valuation,0.15,0,Forward P/E
+1,rates,0.25,0,1-year changes in 10y real and nominal yields and Fed hike odds
+1,valuation,0.15,0,Nasdaq-100 forward P/E (AI basket P/E moved to watchlist)
 1,oil,0.10,0,WTI crude
 2,capex,0.35,0,Aggregate hyperscaler capex guidance
 2,buildout,0.25,0,Data-center delay and cancellation reports
@@ -11,8 +11,8 @@ level,group,weight,single_company,note
 3,spreads,0.40,0,HY CCC B IG OAS (one credit-spread composite)
 3,coreweave,0.20,1,CRWV stock bond CDS (single company; capped 20%)
 3,bdc,0.25,0,BDC discount and index return
-3,gpu,0.15,0,GPU rental prices (collateral value)
+3,gpu,0.15,0,H100 rental price (B200 moved to watchlist)
 4,stress_idx,0.40,0,STLFSI NFCI ANFCI MOVE (overlapping stress indices; HY spread is an input to STLFSI)
-4,banks,0.20,0,KBW bank index drawdown
+4,banks,0.20,0,Nasdaq Bank index drawdown (KBW has no free keyless feed)
 4,funding,0.20,0,SOFR vs IORB spreads
-4,privcredit,0.20,0,Private credit redemptions and gating
+4,privcredit,0.20,0,Non-traded BDC redemptions (gating count moved to watchlist)

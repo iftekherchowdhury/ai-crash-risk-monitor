@@ -5,6 +5,9 @@ Thanks for helping. Three kinds of contribution:
 ## Data corrections and manual readings
 Add or fix rows in `data/readings.csv` (`date,id,value,obs_date,status,source`). Every value needs a public source URL and the date the value was observed. Never estimate a value; leave it missing instead.
 
+## Automating a manual indicator
+Very welcome. The source must be free, need no API key or login, allow automated access in its terms, and work from GitHub Actions. No scraping behind bot challenges. Add it to `scripts/fetch_fred.py` (or a new fetch script), set `mode` to `auto` in `data/indicators.csv`, and note the source in the PR. Columns: `mode` (auto/manual), `scored` (0 = watchlist), `core` (1 = has free history and is used in the core model).
+
 ## New indicators
 Open a "New indicator" issue first. A PR should add a row to `data/indicators.csv` (calm, stressed, weight, source), assign it to a composite in `data/groups.csv`, explain why it isn't redundant with existing members, and, if it has free history, extend the backtest.
 

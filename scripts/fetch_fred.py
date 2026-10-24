@@ -7,16 +7,17 @@ import csv, json, os, subprocess, sys, time, datetime as dt
 D = sys.argv[1]; root = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); os.chdir(root)
 KEY = os.environ.get('FRED_API_KEY', '').strip()
 NDX_RECORD = 31224.69  # Oct 6, 2026 record close; drawdown uses max(record, highest close since)
-SIMPLE = {'vxn': 'VXNCLS', 'real10': 'DFII10', 'nom10': 'DGS10', 'vix': 'VIXCLS', 'wti': 'DCOILWTICO', 'hy': 'BAMLH0A0HYM2',
+SIMPLE = {'vxn': 'VXNCLS', 'vix': 'VIXCLS', 'wti': 'DCOILWTICO', 'hy': 'BAMLH0A0HYM2',
           'ccc': 'BAMLH0A3HYC', 'b_oas': 'BAMLH0A2HYB', 'ig': 'BAMLC0A0CM', 'stlfsi': 'STLFSI4', 'nfci': 'NFCI', 'anfci': 'ANFCI'}
 WEEKLY = {'stlfsi', 'nfci', 'anfci'}
 QUARTERLY = {'capex', 'bdc_disc', 'bdc_ytd', 'pc_redeem', 'ndx_pe', 'dc_cancel'}  # manual, slow-moving: ok until ~100 days old
 start = (dt.date.fromisoformat(D) - dt.timedelta(days=40)).isoformat()
+long_start = (dt.date.fromisoformat(D) - dt.timedelta(days=400)).isoformat()
 
 def get(url):  # curl: FRED stalls some non-curl TLS clients
     return subprocess.run(['curl', '-fsSL', '--max-time', '60', url], check=True, capture_output=True).stdout
 
-def series(sid):
+def series(sid, start=start):
     if KEY:
         url = f'https://api.stlouisfed.org/fred/series/observations?series_id={sid}&api_key={KEY}&file_type=json&observation_start={start}&observation_end={D}'
     else:
@@ -40,7 +41,7 @@ def bdays(a, b):
         a += dt.timedelta(days=1); n += a.weekday() < 5
     return n
 
-ind = list(csv.DictReader(open('data/indicators.csv')))
+ind = [i for i in csv.DictReader(open('data/indicators.csv')) if i.get('scored', '1') == '1' or i['id'] in ()]
 rd = list(csv.DictReader(open('data/readings.csv')))
 last = {}
 for r in sorted(rd, key=lambda r: r['date']):  # same-day manual rows are kept (re-runs don't erase hand entries)
@@ -55,6 +56,20 @@ nd = series('NASDAQ100')
 if nd:
     k, v = latest(nd); peak = max([NDX_RECORD] + [x for d, x in nd.items() if d >= '2026-10-06'])
     fetched['ndx'] = (k, round((v / peak - 1) * 100, 2), 'https://fred.stlouisfed.org/series/NASDAQ100')
+sox = series('NASDAQSOX', '1990-01-01')  # drawdown from all-time record close
+if sox:
+    k, v = latest(sox); fetched['sox_dd'] = (k, round((v / max(sox.values()) - 1) * 100, 2), 'https://fred.stlouisfed.org/series/NASDAQSOX')
+bank = series('NASDAQBANK', long_start)  # drawdown from trailing 252-session high
+if bank:
+    ks = sorted(bank); k = ks[-1]; fetched['bank_dd'] = (k, round((bank[k] / max(bank[x] for x in ks[-252:]) - 1) * 100, 2), 'https://fred.stlouisfed.org/series/NASDAQBANK')
+def yoy(sid):  # change vs the last observation on or before the same date a year earlier
+    s = series(sid, long_start)
+    if not s: return None
+    k = max(s); ago = (dt.date.fromisoformat(k) - dt.timedelta(days=365)).isoformat(); prev = [d for d in s if d <= ago]
+    return (k, round(s[k] - s[max(prev)], 3), f'https://fred.stlouisfed.org/series/{sid}') if prev else None
+for i, sid in (('real10_chg', 'DFII10'), ('nom10_chg', 'DGS10')):
+    r = yoy(sid)
+    if r: fetched[i] = r
 iorb = series('IORB')
 for i, sid in (('sofr_iorb', 'SOFR'), ('sofr99', 'SOFR99')):
     s = series(sid)

@@ -24,6 +24,8 @@ jobs:
           ids = {i['id'] for i in ind}
           unk = {r['id'] for r in csv.DictReader(open('data/readings.csv'))} - ids
           nosrc = [f"{r['date']} {r['id']}" for r in csv.DictReader(open('data/readings.csv')) if r['value'] and not r['source']]
+          badcol = [i['id'] for i in ind if i.get('mode') not in ('auto','manual') or i.get('scored') not in ('0','1') or i.get('core') not in ('0','1')]
+          bad += badcol
           if bad or unk or nosrc: sys.exit(f"bad indicators {bad}; unknown reading ids {unk}; values without source {nosrc[:10]}")
           print('ok', len(ind), 'indicators')
           PY
