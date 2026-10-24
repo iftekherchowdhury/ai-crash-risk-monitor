@@ -14,7 +14,7 @@ for i in ind:
     r = get(D, i['id']); p = get(prevD, i['id']) if prevD else None
     num = lambda r: float(r['value']) if r and r['value'] != '' else None
     I.append({'id': i['id'], 'l': int(i['level']), 'g': i['group'], 'n': i['name'], 'u': i['unit'], 'c': float(i['calm']), 's': float(i['stressed']),
-              'w': float(i['weight']), 'v': num(r), 'od': r['obs_date'] if r else '', 'st': r['status'] if r else 'missing', 'prev': num(p)})
+              'w': float(i['weight']), 'mode': i['mode'], 'sc1': i['scored'] == '1', 'core': i['core'] == '1', 'v': num(r), 'od': r['obs_date'] if r else '', 'st': r['status'] if r else 'missing', 'prev': num(p)})
 G = [{'l': int(g['level']), 'g': g['group'], 'w': float(g['weight']), 'one': g['single_company'] == '1', 'note': g['note'],
       'sc': out['groups'][g['level']].get(g['group'])} for g in grp]
 H = {}
@@ -31,5 +31,5 @@ bt = json.load(open('data/backtest.json')); s = bt['series']
 q = [[o['m'], o['all'], o['l1'], o['l3'], o['l4']] for o in s if o['m'][5:] in ('03', '06', '09', '12')]
 if q[-1][0] != s[-1]['m']: q.append([s[-1]['m'], s[-1]['all'], s[-1]['l1'], s[-1]['l3'], s[-1]['l4']])
 data = {'asOf': D, 'history': [H[k] for k in sorted(H)], 'sparkName': sp['names'], 'spark': [v[-30:] for v in sp['values']],
-        'groups': G, 'ind': I, 'events': ev, 'calendar': cal, 'bt': q, 'cal1': bt['l1_calibration']}
+        'groups': G, 'ind': I, 'events': ev, 'calendar': cal, 'bt': q, 'cal1': bt['l1_calibration'], 'core': [out['core'].get(str(k)) for k in (1, 2, 3, 4)]}
 print('// DATA-START\nconst DATA = ' + json.dumps(data, separators=(',', ':')) + ';\n// DATA-END')
