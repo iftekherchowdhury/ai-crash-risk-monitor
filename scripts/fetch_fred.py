@@ -43,8 +43,8 @@ def bdays(a, b):
 ind = list(csv.DictReader(open('data/indicators.csv')))
 rd = list(csv.DictReader(open('data/readings.csv')))
 last = {}
-for r in rd:
-    if r['date'] < D and r['value'] != '': last[r['id']] = r
+for r in sorted(rd, key=lambda r: r['date']):  # same-day manual rows are kept (re-runs don't erase hand entries)
+    if r['date'] <= D and r['value'] != '': last[r['id']] = r
 rows = []
 def latest(s): k = max(s); return k, s[k]
 fetched = {}
@@ -63,6 +63,9 @@ for i, sid in (('sofr_iorb', 'SOFR'), ('sofr99', 'SOFR99')):
         k = common[-1]; fetched[i] = (k, round((s[k] - iorb[k]) * 100, 1), f'https://fred.stlouisfed.org/series/{sid}')
 for i in ind:
     iid = i['id']
+    o = last.get(iid)
+    if iid in fetched and o and o['date'] == D and (o['obs_date'] or '') > fetched[iid][0]:
+        del fetched[iid]  # a hand-entered same-day value is newer than FRED's; keep it
     if iid in fetched:
         od, v, src = fetched[iid]
         lim = 8 if iid in WEEKLY else 3
@@ -75,6 +78,8 @@ for i in ind:
         rows.append([D, iid, r['value'], od, st, r['source']])
     else:
         rows.append([D, iid, '', '', 'missing', ''])
+for r in rows:  # never replace a sourced same-day value with a failed fetch
+    if r[4] == 'missing' and r[1] in last: o = last[r[1]]; r[2:] = [o['value'], o['obs_date'], o['status'], o['source']]
 keep = [r for r in rd if r['date'] != D]
 with open('data/readings.csv', 'w', newline='') as f:
     w = csv.writer(f); w.writerow(['date', 'id', 'value', 'obs_date', 'status', 'source'])

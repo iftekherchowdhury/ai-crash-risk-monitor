@@ -35,7 +35,11 @@ jobs:
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}   # optional
         run: |
-          D="${{ steps.d.outputs.date }}"; [ -n "$D" ] || D=$(TZ=America/New_York date +%F)
+          D="${{ steps.d.outputs.date }}"
+          if [ -z "$D" ]; then  # today in New York; weekends roll back to Friday's close
+            D=$(TZ=America/New_York date +%F); dow=$(date -d "$D" +%u)
+            [ "$dow" -gt 5 ] && D=$(date -d "$D -$((dow-5)) day" +%F)
+          fi
           echo "D=$D" >> "$GITHUB_ENV"
           python3 scripts/fetch_fred.py "$D"
       - name: Fetch backtest history
