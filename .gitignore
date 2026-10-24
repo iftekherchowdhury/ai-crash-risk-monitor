@@ -1,0 +1,7 @@
+hist/
+__pycache__/
+_site/
+canvas/page.tsx
+canvas/page_data.js
+.env
+*.key

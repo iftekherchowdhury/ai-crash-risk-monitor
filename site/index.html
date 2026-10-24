@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI crash risk monitor</title>
+<meta name="description" content="Open-source daily monitor of the probability of four escalating AI-driven market breakdowns. Not financial advice.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>AI crash risk monitor</h1>
+  <p id="summary" class="muted">Loading…</p>
+</header>
+<main>
+  <section><h2>Risk levels</h2><p class="muted" id="horizon"></p><div id="levels" class="grid4"></div></section>
+  <section><h2>Biggest stress contributors</h2><div id="movers"></div></section>
+  <section><h2>Composites</h2><p class="muted">Correlated indicators are averaged into one composite so they count once. Single-company composites are capped at 20% of a level.</p><div id="composites"></div></section>
+  <section><h2>Indicators</h2><div id="filter" class="seg"></div><div id="indicators"></div></section>
+  <section><h2>Probability history</h2><div id="history"></div></section>
+  <section><h2>Backtest, 1997–today</h2><p class="muted">Month-end readings of a reduced model built only from free FRED history. 0 = calm, 1 = every component at its stressed threshold.</p><div id="btchart"></div><div id="episodes"></div><p id="btnow"></p><div id="calib"></div><p class="muted">Months already 20%+ below the prior record are excluded. Overlapping windows mean only a handful of independent episodes; treat hit rates as rough.</p></section>
+  <div class="grid2">
+    <section><h2>Events log</h2><div id="events"></div></section>
+    <section><h2>Upcoming releases</h2><div id="calendar"></div></section>
+  </div>
+  <section><h2>Method and limitations</h2><div id="method"></div></section>
+  <section><h2>Sources</h2><ul id="sources"></ul></section>
+</main>
+<footer class="muted">Open source (MIT) · <a href="https://github.com/iftekherchowdhury/ai-crash-risk-monitor">GitHub</a> · Not financial advice. Data sources keep their own terms.</footer>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+name: New indicator
+description: Propose an indicator to add to a level
+labels: [indicator]
+body:
+  - type: input
+    id: name
+    attributes: {label: Indicator name, placeholder: "e.g. Oracle 5y CDS"}
+    validations: {required: true}
+  - type: dropdown
+    id: level
+    attributes: {label: Level, options: ["1 Equity correction", "2 Capex bust", "3 Credit losses", "4 Systemic event"]}
+    validations: {required: true}
+  - type: input
+    id: source
+    attributes: {label: Public data source (URL), description: Free daily source preferred; note if FRED has it.}
+    validations: {required: true}
+  - type: input
+    id: thresholds
+    attributes: {label: Proposed calm and stressed values, placeholder: "calm 150 bps, stressed 600 bps"}
+  - type: textarea
+    id: why
+    attributes: {label: Why it adds information, description: What it captures that existing composite members don't, and history if any.}
+    validations: {required: true}

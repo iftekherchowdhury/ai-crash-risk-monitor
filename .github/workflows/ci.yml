@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - name: Validate CSVs
+        run: |
+          python3 - <<'PY'
+          import csv, sys
+          ind = list(csv.DictReader(open('data/indicators.csv')))
+          grp = {(g['level'], g['group']) for g in csv.DictReader(open('data/groups.csv'))}
+          bad = [i['id'] for i in ind if (i['level'], i['group']) not in grp or float(i['calm']) == float(i['stressed'])]
+          ids = {i['id'] for i in ind}
+          unk = {r['id'] for r in csv.DictReader(open('data/readings.csv'))} - ids
+          nosrc = [f"{r['date']} {r['id']}" for r in csv.DictReader(open('data/readings.csv')) if r['value'] and not r['source']]
+          if bad or unk or nosrc: sys.exit(f"bad indicators {bad}; unknown reading ids {unk}; values without source {nosrc[:10]}")
+          print('ok', len(ind), 'indicators')
+          PY
+      - name: Compute (latest date in readings)
+        run: |
+          D=$(tail -n +2 data/readings.csv | cut -d, -f1 | sort | tail -1)
+          echo "D=$D" >> "$GITHUB_ENV"
+          python3 compute.py "$D"
+      - name: Backtest
+        run: python3 scripts/fetch_hist.py && python3 compute.py "$D" --backtest
+      - name: Summary
+        run: |
+          { echo '### Probabilities'; echo '```'; grep "^$D" data/probabilities.csv; echo '```'; echo '### L1 calibration'; python3 -c "import json;print(json.load(open('data/backtest.json'))['l1_calibration'])"; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Build site
+        run: sh scripts/build_site.sh && test -s _site/data/out.json

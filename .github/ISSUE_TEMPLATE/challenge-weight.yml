@@ -1,0 +1,19 @@
+name: Challenge a weight, threshold or anchor
+description: Argue that a parameter is wrong
+labels: [method]
+body:
+  - type: input
+    id: param
+    attributes: {label: Parameter, placeholder: "e.g. groups.csv level 3 coreweave weight, or L1 12-month anchor"}
+    validations: {required: true}
+  - type: input
+    id: change
+    attributes: {label: Current value → proposed value}
+    validations: {required: true}
+  - type: textarea
+    id: evidence
+    attributes: {label: Evidence, description: Market-implied odds, base rates, backtest results or research. Links please.}
+    validations: {required: true}
+  - type: textarea
+    id: backtest
+    attributes: {label: Backtest rerun (optional), description: Output of compute.py --backtest with the change.}
